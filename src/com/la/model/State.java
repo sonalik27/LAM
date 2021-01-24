@@ -15,7 +15,7 @@ public class State {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="country_id")
+	@Column(name="state_id")
 	int stateId;
 	
 	@Column(name="state_name")
@@ -23,13 +23,27 @@ public class State {
 	
 	@OneToOne
 	@JoinColumn(name="country_id")
-	Country country;
+	Country country;	
 	
+
+	public State() {
+		super();
+	}
 	
 
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
+
+
+
+	public State(String stateName, Country country) {
+		super();
+		this.stateName = stateName;
+		this.country = country;
+	}
+
+
 
 	public String getStateName() {
 		return stateName;

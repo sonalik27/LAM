@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name = "city")
 public class City {
@@ -23,6 +26,7 @@ public class City {
 
 	@OneToOne
 	@JoinColumn(name = "state_id")
+	@NotFound (action = NotFoundAction.IGNORE)
 	State state;
 
 	public City() {

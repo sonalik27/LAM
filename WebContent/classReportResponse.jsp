@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page errorPage="error.jsp" isErrorPage="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +25,7 @@
 	
 
 	<form action="generateClassReport" method="post">
-		<table border="0">
+		<table>
 		<tr>
 				<td>Class Name :</td>
 				<td><select name="selectClass">
@@ -42,37 +41,40 @@
 						</c:forEach>
 				</select></td>
 			</tr>
-			<tr>
+			  <tr align="right">
+				<td colspan="2"><input type="submit" value="Submit" /></td>
+			</tr>
+			</table>
+			<br/>
 			   <table border="1">
 			   		<th> Subjects List: </th>
-					<c:forEach var="aclass" items="${classesList}">
+					<c:forEach var="classsubject" items="${classReportSubjectList}">
 						<tr>
-							<td>     ${aclass.className}</td>
+							<td>     ${classsubject.subject.subjectId}</td>
+							<td>     ${classsubject.subject.subjectName}</td>
 						</tr>
 					</c:forEach>
 			   </table>
-			 </tr>
-			 <tr>
+		      <br/>
 			   <table border="1">
 			   		<th> Students List: </th>
-					<c:forEach var="aclass" items="${classesList}">
+					<c:forEach var="student" items="${classReportStudentList}">
 						<tr>
-							<td>     ${aclass.className}</td>
+							<td>     ${student.studentId} </td>
+							<td>     ${student.studentName} </td>
 						</tr>
 					</c:forEach>
 			   </table>
-			 </tr>
-			 <tr>
+			 <br/>
 			   <table border="1">
 			   		<th> Teachers List: </th>
-					<c:forEach var="aclass" items="${classesList}">
+					<c:forEach var="teacher" items="${classReportTracherList}">
 						<tr>
-							<td>     ${aclass.className}</td>
+							<td>     ${teacher.teacherId}</td>
+							<td>     ${teacher.teacherName}</td>
 						</tr>
 					</c:forEach>
 			   </table>
-			 </tr>
-		</table>
 
 	</form>
 

@@ -60,16 +60,16 @@ public class Controller extends HttpServlet {
 			Session session = sessionFactory.openSession();
 
 			List<Class> classesList = session.createQuery("from Class").list();			
-			request.setAttribute("classesList", classesList);
-			
-			List<City> cityList = session.createQuery("from City").list();			
-			request.setAttribute("cityList", cityList);
-			
+			request.setAttribute("classesList", classesList);			
+
+			List<Country> countryList = session.createQuery("from Country").list();			
+			request.setAttribute("countryList", countryList);
+						
 			List<State> stateList = session.createQuery("from State").list();			
 			request.setAttribute("stateList", stateList);
 			
-			List<Country> countryList = session.createQuery("from Country").list();			
-			request.setAttribute("countryList", countryList);
+			List<City> cityList = session.createQuery("from City").list();			
+			request.setAttribute("cityList", cityList);
 			
 			RequestDispatcher rd=request.getRequestDispatcher("addStudent.jsp");  
             rd.forward(request, response);
@@ -460,20 +460,26 @@ public class Controller extends HttpServlet {
 			List<Class> aClassList =  session.createQuery("from Class c where c.classId ="+ classId).list();
 			Class aClass = null;
 			if(aClassList!=null && !aClassList.isEmpty()) {
-				aClass = aClassList.get(0;)
+				aClass = aClassList.get(0);
 			}
 			
 			//list of subjects
-			List<Subject> subjectList =  session.createQuery("from ClassSubject cs where cs.classId ="+ classId).list();
+			List<Subject> subjectList =  session.createQuery("from ClassSubject cs where cs.aClass.classId ="+ classId).list();
 			
 			//list of student
-			List<Student> studentList =  session.createQuery("from Student s  where s.classId ="+ classId).list();
+			List<Student> studentList =  session.createQuery("from Student s  where s.aclass.classId ="+ classId).list();
 			
 			//list of teachers
 			List<Teacher> teacherList = new ArrayList<Teacher>();
-			List<ClassSubjectTeacher> cstList =  session.createQuery("from ClassSubjectTeacher cst  where cst.aClass.classId ="+ classId).list();
+			List<ClassSubjectTeacher> cstList =  session.createQuery("from ClassSubjectTeacher").list();
 			for(ClassSubjectTeacher cst: cstList ) {
-				teacherList.add(cst.getTeacher());
+				for(ClassSubject cs: cst.getClassSubjectList()) {
+				    if(cs.getaClass().getClassId() == Integer.parseInt(classId)) {
+				    	teacherList.add(cst.getTeacher());
+				    	break;
+				    }
+				}
+				
 			}
 			
 			request.setAttribute("classReportSubjectList", subjectList);

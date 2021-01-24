@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/academy</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">admin</property>
+    <mapping class="com.la.model.Subject"/>
+    <mapping class="com.la.model.Class"/>
+    <mapping class="com.la.model.City"/>
+    <mapping class="com.la.model.State"/>
+    <mapping class="com.la.model.Country"/>
+    <mapping class="com.la.model.Student"/>
+    <mapping class="com.la.model.Teacher"/>
+    <mapping class="com.la.model.ClassSubject"/>
+    <mapping class="com.la.model.ClassSubjectTeacher"/>
+    
+  </session-factory>
+</hibernate-configuration>
